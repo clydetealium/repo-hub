@@ -1,6 +1,6 @@
 {
   "ui:submitButtonOptions": {
-    "submitText": "Confirm Details",
+    "submitText": "Copy to Clipboard",
     "norender": false,
     "props": {
       "disabled": false,
