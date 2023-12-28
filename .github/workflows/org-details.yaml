@@ -14,20 +14,22 @@ jobs:
         id: get-teams
         run: |
           ACCESS_TOKEN="${{ secrets.ACCESS_TOKEN }}"
-          ORG_NAME="your_organization_name"
+          ORG_NAME="clydetealium"
 
           teams=$(curl -s -H "Authorization: token $ACCESS_TOKEN" \
                   "https://api.github.com/orgs/$ORG_NAME/teams")
 
-          echo "::set-output name=teams::$(echo $teams | jq -c '.[]')"
+          echo "$teams" >> teams.json
+          echo "TEAMS_JSON=$(cat teams.json)" >> $GITHUB_ENV
       
       - name: Get Repositories
         id: get-repos
         run: |
           ACCESS_TOKEN="${{ secrets.ACCESS_TOKEN }}"
-          ORG_NAME="your_organization_name"
+          ORG_NAME="clydetealium"
 
           repos=$(curl -s -H "Authorization: token $ACCESS_TOKEN" \
                   "https://api.github.com/orgs/$ORG_NAME/repos")
 
-          echo "::set-output name=repos::$(echo $repos | jq -c '.[]')"
+          echo "$repos" >> repos.json
+          echo "REPOS_JSON=$(cat repos.json)" >> $GITHUB_ENV
