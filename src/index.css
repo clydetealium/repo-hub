@@ -11,3 +11,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.rjsf > .form-group > .form-group > .container-fluid > .row:nth-child(even) {
+  background-color: cyan;
+}
+
+.rjsf > .form-group > .form-group > .container-fluid > .row:nth-child(odd) {
+  background-color: lightgrey;
+}
+
+.rjsf > .form-group > .form-group > .container-fluid > .row {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.App {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
