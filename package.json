@@ -7,6 +7,7 @@
     "@fortawesome/fontawesome-free": "^6.5.1",
     "@rjsf/bootstrap-4": "^5.15.1",
     "@rjsf/core": "^5.15.1",
+    "@rjsf/mui": "^5.15.1",
     "@rjsf/utils": "^5.15.1",
     "@rjsf/validator-ajv8": "^5.15.1",
     "@testing-library/jest-dom": "^5.17.0",

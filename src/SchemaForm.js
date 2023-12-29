@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import Form from '@rjsf/bootstrap-4';
+// import Form from '@rjsf/bootstrap-4';
+import Form from '@rjsf/mui';
 import validator from '@rjsf/validator-ajv8';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 

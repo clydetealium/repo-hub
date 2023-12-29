@@ -15,28 +15,54 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  list-teams:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get Teams
+        id: get-teams
+        run: |
+          ACCESS_TOKEN="${{ secrets.ACCESS_TOKEN }}"
+          ORG_NAME="deleteme-please"
+
+          teams=$(curl -s -H "Authorization: token $ACCESS_TOKEN" \
+            "https://api.github.com/orgs/$ORG_NAME/teams" \
+            | jq '[.[] | .slug]')
+          
+          jq 'definitions.teamSlugs.enum |= $teams' ./src/schema.json > tmpfile && mv tmpfile ./src/schema.json
+          rm tmpfile
+          echo ./src/schema.json
+
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    depends-on: list-teams
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "18"
+
       - name: Install dependencies and build
         run: |
           npm install
           npm run build
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: './build'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

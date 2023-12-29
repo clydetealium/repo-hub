@@ -1,4 +1,13 @@
 {
+  "collaborators": { 
+    "admins": {},
+    "teams":{
+      "ui:title": false,
+      "team": {
+        "ui:title": false
+      }
+    }
+  },
   "ui:submitButtonOptions": {
     "submitText": "Copy to Clipboard",
     "norender": false,

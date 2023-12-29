@@ -3,10 +3,6 @@
   "description": "Please provide the following details regarding the repository you wish to create.",
   "type": "object",
   "properties": {
-    "name": {
-      "title": "Repo Name",
-      "type": "string"
-    },
     "action": {
       "title": "Action",
       "description": "Is this an action?",
@@ -47,7 +43,7 @@
     }
   },
   "required": [
-    "name",
+    "branches",
     "collaborators"
   ],
   "definitions": {
@@ -72,6 +68,13 @@
         }
       }
     },
+    "teamSlugs": {
+      "enum": [
+        "blah",
+        "bub",
+        "meep"
+      ]
+    },
     "grants": {
       "type": "object",
       "title": "Grants",
@@ -80,8 +83,14 @@
           "type": "array",
           "title": "Admins",
           "items": {
-            "title": "Admin",
-            "type": "string"
+            "title": "",
+            "type": "object",
+            "properties": {
+              "name": {
+                "title": "team name",
+                "$ref": "#/definitions/teamSlugs"
+              }
+            }
           },
           "uniqueItems": true,
           "minItems": 1
@@ -90,6 +99,7 @@
           "type": "array",
           "title": "Teams",
           "items": {
+            "title": "",
             "$ref": "#/definitions/team"
           },
           "uniqueItems": true,
@@ -103,11 +113,11 @@
     },
     "team": {
       "type": "object",
-      "title": "Team",
       "properties": {
         "name": {
+          "title": "team name",
           "type": "string",
-          "title": "Name"
+          "$ref": "#/definitions/teamSlugs"
         },
         "permission": {
           "type": "string",
