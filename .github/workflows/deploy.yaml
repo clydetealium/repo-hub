@@ -35,10 +35,9 @@ jobs:
           jq 'definitions.teamSlugs.enum |= $teams' ./src/schema.json > tmpfile && mv tmpfile ./src/schema.json
           rm tmpfile
           echo ./src/schema.json
-        with:
-          env:
-            ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-            ORG_NAME: "deleteme-please"
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          ORG_NAME: "deleteme-please"
 
 
   deploy:
