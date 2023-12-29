@@ -26,7 +26,8 @@ jobs:
         run: |
           echo "Getting teams for $ORG_NAME"
           curl -s -H "Authorization: token $ACCESS_TOKEN" \
-            "https://api.github.com/orgs/$ORG_NAME/teams
+            "https://api.github.com/orgs/$ORG_NAME/teams"
+          
           echo "EXIT: $?"
           teams=$(curl -s -H "Authorization: token $ACCESS_TOKEN" \
             "https://api.github.com/orgs/$ORG_NAME/teams" \
