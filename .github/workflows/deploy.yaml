@@ -30,7 +30,6 @@ jobs:
             | jq '[.[] | .slug]')
           
           jq ".definitions.teamSlugs.enum |= $teams" ./src/schema.json > tmpfile && mv tmpfile ./src/schema.json
-          rm tmpfile
           echo ./src/schema.json
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
