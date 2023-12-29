@@ -24,9 +24,10 @@ jobs:
       - name: Get Teams
         id: get-teams
         run: |
-          ACCESS_TOKEN="${{ secrets.ACCESS_TOKEN }}"
-          ORG_NAME="deleteme-please"
-
+          echo "Getting teams for $ORG_NAME"
+          curl -s -H "Authorization: token $ACCESS_TOKEN" \
+            "https://api.github.com/orgs/$ORG_NAME/teams
+          echo "EXIT: $?"
           teams=$(curl -s -H "Authorization: token $ACCESS_TOKEN" \
             "https://api.github.com/orgs/$ORG_NAME/teams" \
             | jq '[.[] | .slug]')
@@ -34,6 +35,11 @@ jobs:
           jq 'definitions.teamSlugs.enum |= $teams' ./src/schema.json > tmpfile && mv tmpfile ./src/schema.json
           rm tmpfile
           echo ./src/schema.json
+        with:
+          env:
+            ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+            ORG_NAME: "deleteme-please"
+
 
   deploy:
     environment:
